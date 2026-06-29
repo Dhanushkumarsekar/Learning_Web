@@ -18,6 +18,9 @@ import courseImage3 from '../assets/pexels-olya-kobruseva-5561923 1 - Copy.png';
 import courseImage4 from '../assets/pexels-shane-aldendorff-924676 1.png';
 import courseImage5 from '../assets/pexels-brett-sayles-2881232 1.png';
 import courseImage6 from '../assets/pexels-picjumbocom-196645 (1) 1.png';
+import courseImage7 from '../assets/unsplash_m_HRfLhgABo.png';
+import courseImage8 from '../assets/full-stack-course.jpg';
+import courseImage9 from '../assets/pexels-lukas-590016 1.png';
 
 const courseImage1 = '/image-001.png';
 const courseImage2 = '/image-002.png';
@@ -71,6 +74,21 @@ const courseCards = [
         title: 'UI/UX Design',
         subtitle: 'Create User-Centered Designs and Seamless Experiences in the world of UI/UX design',
         image: courseImage6,
+    },
+    {
+        title: 'Cyber Security',
+        subtitle: 'Protect systems and networks from cyber threats and attacks',
+        image: courseImage7,
+    },
+    {
+        title: 'Python Programming',
+        subtitle: 'Learn Python for automation, web development, and data science',
+        image: courseImage9,
+    },
+    {
+        title: 'Project Management',
+        subtitle: 'Manage teams and deliver projects on time with the right tools',
+        image: courseImage8,
     },
 ];
 
@@ -243,24 +261,97 @@ const PublicCourses = () => {
                         </Typography>
                     </Box>
                 ) : (
-                    <Box
-                        sx={{
-                            display: 'grid',
-                            gridTemplateColumns: {
-                                xs: '1fr',
-                                sm: 'repeat(2, 1fr)',
-                                md: 'repeat(3, 1fr)',
-                            },
-                            justifyContent: 'center',
-                            gap: { xs: 2.5, sm: 3, md: 3.5 },
-                        }}
-                    >
-                        {filteredCourses.map((course) => (
-                            <Card
-                                key={course.title}
-                                component={RouterLink}
-                                to={`/home/details?course=${encodeURIComponent(course.title)}`}
+                    <>
+                        <Box
+                            sx={{
+                                mb: { xs: 4, md: 6 },
+                                maxWidth: 1200,
+                                mx: 'auto',
+                                textAlign: 'center',
+                            }}
+                        >
+                            <Typography
                                 sx={{
+                                    color: '#1a1f2e',
+                                    fontSize: { xs: '2rem', md: '2.55rem' },
+                                    fontWeight: 700,
+                                    mb: 1,
+                                }}
+                            >
+                                Trending Courses
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    color: '#5a6275',
+                                    fontSize: { xs: '1rem', md: '1.05rem' },
+                                    maxWidth: 840,
+                                    mx: 'auto',
+                                }}
+                            >
+                                Explore the courses learners are enrolling in most right now, with curated images and popular skills.
+                            </Typography>
+                        </Box>
+                        <Box
+                            sx={{
+                                maxWidth: 1200,
+                                mx: 'auto',
+                                display: 'grid',
+                                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', md: 'repeat(4, minmax(0, 1fr))' },
+                                gap: { xs: 2.5, md: 3 },
+                                mb: { xs: 4, md: 5 },
+                            }}
+                        >
+                            {courseCards.slice(0, 4).map((course) => (
+                                <Card
+                                    key={`trending-${course.title}`}
+                                    sx={{
+                                        borderRadius: '20px',
+                                        overflow: 'hidden',
+                                        boxShadow: '0 12px 24px rgba(14, 30, 93, 0.08)',
+                                        transition: 'transform 0.24s ease',
+                                        '&:hover': { transform: 'translateY(-6px)' },
+                                    }}
+                                >
+                                    <Box
+                                        component="img"
+                                        src={course.image}
+                                        alt={course.title}
+                                        sx={{
+                                            width: '100%',
+                                            height: 160,
+                                            objectFit: 'cover',
+                                            display: 'block',
+                                        }}
+                                    />
+                                    <Box sx={{ p: 2.5 }}>
+                                        <Typography sx={{ fontSize: '1.05rem', fontWeight: 700, mb: 1 }}>
+                                            {course.title}
+                                        </Typography>
+                                        <Typography sx={{ fontSize: '0.95rem', color: '#5a6275' }}>
+                                            {course.subtitle}
+                                        </Typography>
+                                    </Box>
+                                </Card>
+                            ))}
+                        </Box>
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                gridTemplateColumns: {
+                                    xs: '1fr',
+                                    sm: 'repeat(2, 1fr)',
+                                    md: 'repeat(3, 1fr)',
+                                },
+                                justifyContent: 'center',
+                                gap: { xs: 2.5, sm: 3, md: 3.5 },
+                            }}
+                        >
+                            {filteredCourses.map((course) => (
+                                <Card
+                                    key={course.title}
+                                    component={RouterLink}
+                                    to={`/home/details?course=${encodeURIComponent(course.title)}`}
+                                    sx={{
                                     textDecoration: 'none',
     width: 240,
     maxWidth: 240,
@@ -344,6 +435,7 @@ const PublicCourses = () => {
                             </Card>
                         ))}
                     </Box>
+                    </>
                 )}
             </Container>
 

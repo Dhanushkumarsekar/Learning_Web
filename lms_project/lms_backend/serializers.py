@@ -5,7 +5,7 @@ from django.conf import settings
 import os
 from .models import (
     Team, Category, Course, Video, Quiz, Question,
-    Enrollment, QuizAttempt, VideoProgress, Certificate, Notification, Feedback, CourseAssignment
+    Enrollment, QuizAttempt, VideoProgress, Certificate, Notification, Feedback, CourseAssignment, ChatMessage
 )
 from .utils import (
     calculate_course_progress, get_user_analytics,
@@ -54,6 +54,7 @@ class TeamDetailSerializer(serializers.ModelSerializer):
 # ============================
 class CategorySerializer(serializers.ModelSerializer):
     course_count = serializers.SerializerMethodField()
+
 
     class Meta:
         model = Category
@@ -141,7 +142,7 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
-
+        
 # ============================
 # Question/Quiz Serializers
 # ============================
@@ -702,3 +703,13 @@ class FeedbackSerializer(serializers.ModelSerializer):
     
     def get_course_title(self, obj):
         return obj.course.title if obj.course else None
+
+
+# ============================
+# ChatMessage Serializer
+# ============================
+class ChatMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChatMessage
+        fields = ('id', 'user', 'role', 'content', 'created_at', 'conversation_id')
+        read_only_fields = ('user', 'created_at')

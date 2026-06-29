@@ -31,6 +31,9 @@ import heroIllustration from '../assets/Group 2621.png';
 import phoneFrame from '../assets/Group 2659.png';
 import aboutImage from '../assets/unsplash_vbxyFxlgpjM.png';
 import courseAnalyticsImage from '../assets/pexels-olya-kobruseva-5561923 1 - Copy.png';
+import courseCyberSecurityImage from '../assets/pexels-lukas-590016 1.png';
+import courseDesignImage from '../assets/full-stack-course.jpg';
+import courseProgrammingImage from '../assets/unsplash_m_HRfLhgABo.png';
 import logoImage from '../assets/vdartacademylogo1 3.png';
 import courseCardFrameImage from '../assets/Group 2626.png';
 import featureAnalyticsIcon from '../assets/Container.png';
@@ -54,6 +57,9 @@ import { PUBLIC_SITE_NAV_SECTIONS } from '../components/public/publicSiteNav';
 
 const courseFullStackImage = '/image-001.png';
 const courseDigitalMarketingImage = '/image-002.png';
+const courseCyberSecurityCourseImage = courseCyberSecurityImage;
+const courseGraphicDesignImage = courseDesignImage;
+const courseProgrammingCourseImage = courseProgrammingImage;
 const CONTACT_EMAIL = 'info@vdartacademy.com';
 const CONTACT_PHONE_DISPLAY = '+91 9944548333';
 const CONTACT_PHONE_LINK = 'tel:+919944548333';
@@ -131,17 +137,70 @@ const featuresRight = [
 const courseCards = [
     {
         title: 'Full Stack',
-        description: 'Learning on creating beginner level websites developer',
+        description: 'Build complete web apps from frontend to backend with modern tools.',
         image: courseFullStackImage,
     },
     {
         title: 'Digital Marketing',
-        description: 'Learning on marketing strategies and concepts for beginners',
+        description: 'Learn digital campaign strategy, analytics, and social media growth.',
         image: courseDigitalMarketingImage,
     },
     {
         title: 'Data Analytics',
-        description: 'Learning on the basics of data analytics',
+        description: 'Turn raw data into meaningful business insights and reports.',
+        image: courseAnalyticsImage,
+    },
+    {
+        title: 'AI/ML',
+        description: 'Explore machine learning, AI models, and intelligent automation.',
+        image: courseProgrammingCourseImage,
+    },
+    {
+        title: 'Cloud Computing',
+        description: 'Deploy, scale, and manage apps using cloud infrastructure services.',
+        image: courseGraphicDesignImage,
+    },
+    {
+        title: 'UI/UX Design',
+        description: 'Design beautiful, user-friendly interfaces and experiences.',
+        image: courseCyberSecurityCourseImage,
+    },
+    {
+        title: 'Cyber Security',
+        description: 'Learn how to secure applications and protect data from threats.',
+        image: courseCyberSecurityCourseImage,
+    },
+    {
+        title: 'Graphic Design',
+        description: 'Create visual content, branding, and digital marketing graphics.',
+        image: courseGraphicDesignImage,
+    },
+    {
+        title: 'Project Management',
+        description: 'Master planning, delivery, and teamwork for technology projects.',
+        image: courseProgrammingCourseImage,
+    },
+];
+
+const trendingCourses = [
+    {
+        title: 'Python Programming',
+        subtitle: 'A practical path from beginner to confident Python developer.',
+        image: courseProgrammingCourseImage,
+    },
+    {
+        title: 'DevOps Fundamentals',
+        subtitle: 'Learn CI/CD, infrastructure automation, and faster releases.',
+        image: courseGraphicDesignImage,
+    },
+    {
+        title: 'Cloud Architecture',
+        subtitle: 'Design scalable cloud systems and secure deployment pipelines.',
+        image: courseGraphicDesignImage,
+    },
+    {
+        title: 'Data Visualization',
+        subtitle: 'Turn data into attractive dashboards and business stories.',
         image: courseAnalyticsImage,
     },
 ];
@@ -1072,6 +1131,58 @@ export default function Home() {
                         {visibleCourseCards.map((course) => (
                             <CourseCard key={course.title} {...course} />
                         ))}
+                    </Box>
+                </Box>
+
+                <Box
+                    sx={{
+                        minHeight: { xs: 'auto', md: 420 },
+                        backgroundColor: '#eef3fa',
+                        px: pageGutter,
+                        pt: { xs: 6, md: '60px' },
+                        pb: { xs: 6, md: '60px' },
+                        textAlign: 'center',
+                    }}
+                >
+                    <Box sx={{ width: '100%', maxWidth: 1180, mx: 'auto' }}>
+                        <Typography
+                            sx={{
+                                color: '#141826',
+                                fontSize: { xs: '2.3rem', md: '2.9rem' },
+                                fontWeight: 700,
+                                lineHeight: 1.05,
+                                mb: { xs: 2.5, md: 4 },
+                            }}
+                        >
+                            Trending Courses
+                        </Typography>
+                        <Typography
+                            sx={{
+                                color: '#4b5563',
+                                fontSize: { xs: '1rem', md: '1.1rem' },
+                                maxWidth: 720,
+                                mx: 'auto',
+                                mb: { xs: 4, md: 5 },
+                            }}
+                        >
+                            Explore the most popular and high-demand courses that learners are choosing right now.
+                        </Typography>
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', md: 'repeat(4, minmax(0, 1fr))' },
+                                gap: { xs: 2.5, md: 3.5 },
+                            }}
+                        >
+                            {trendingCourses.map((course) => (
+                                <CourseCard
+                                    key={course.title}
+                                    title={course.title}
+                                    description={course.subtitle}
+                                    image={course.image}
+                                />
+                            ))}
+                        </Box>
                     </Box>
                 </Box>
 

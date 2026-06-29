@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Outlet, useNavigate, useLocation, useParams } from 'react-router-dom';
 import UserProfile from '../../pages/student/UserProfile';
+import ChatBot from '../ChatBot';
 import EditIcon from '@mui/icons-material/Edit';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -24,11 +25,13 @@ import {
   Toolbar,
   Typography,
   Button,
-  Tooltip
+  Tooltip,
+  Fab
 } from '@mui/material';
 import {
   Menu as MenuIcon,
-  MenuOpen as MenuOpenIcon
+  MenuOpen as MenuOpenIcon,
+  Forum as ForumIcon
 } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import { CourseProgressProvider, useCourseProgress } from '../../contexts/CourseProgressContext';
@@ -66,6 +69,7 @@ const StudentLayout = () => {
   const [notificationAnchorEl, setNotificationAnchorEl] = useState(null);
   const [loadingNotifications, setLoadingNotifications] = useState(false);
   const [creditPoints, setCreditPoints] = useState(0);
+  const [chatBotOpen, setChatBotOpen] = useState(false);
   const lastNotificationAtRef = useRef(null);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -664,8 +668,30 @@ color: '#DC2626',
         }}
       >
         <Toolbar sx={{ flexShrink: 0 }} />
-        <Box sx={{ flexGrow: 1, background: STUDENT_SURFACE_BACKGROUND }}>
+        <Box sx={{ flexGrow: 1, background: STUDENT_SURFACE_BACKGROUND, position: 'relative' }}>
           <Outlet context={{ drawerOpen, creditPoints, refreshCreditPoints: fetchCreditPoints }} />
+          
+          {/* ChatBot FAB Button */}
+          <Tooltip title="Ask Learning Assistant">
+            <Fab
+              color="primary"
+              aria-label="chat"
+              onClick={() => setChatBotOpen(true)}
+              sx={{
+                position: 'fixed',
+                bottom: 24,
+                right: 24,
+                backgroundColor: '#FCD980',
+                color: '#282938',
+                '&:hover': {
+                  backgroundColor: '#FBD570',
+                },
+                boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
+              }}
+            >
+              <ForumIcon />
+            </Fab>
+          </Tooltip>
         </Box>
         {/* Footer */}
         <Box sx={{
@@ -683,6 +709,10 @@ color: '#DC2626',
         </Box>
       </Box>
     </Box>
+
+    {/* ChatBot Dialog */}
+    <ChatBot open={chatBotOpen} onClose={() => setChatBotOpen(false)} />
+
     </CourseProgressProvider>
   );
 };

@@ -289,6 +289,11 @@ except Exception as e:
 OTP_EXPIRY_MINUTES = 5
 OTP_LENGTH = 6
 
+# OpenAI Chatbot Configuration
+OPENAI_API_KEY = config('OPENAI_API_KEY', default='')
+OPENAI_MODEL = config('OPENAI_MODEL', default='gpt-3.5-turbo')
+OPENAI_MAX_TOKENS = config('OPENAI_MAX_TOKENS', default=500, cast=int)
+
 # Logging
 LOGGING = {
     'version': 1,

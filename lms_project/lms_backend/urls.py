@@ -2,6 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from django.urls import path
 from . import views
+from .chatbot_views import ChatViewSet, quick_chat
 
 
 router = DefaultRouter()
@@ -13,9 +14,11 @@ router.register(r'videos', views.VideoViewSet)
 router.register(r'quizzes', views.QuizViewSet)
 router.register(r'enrollments', views.EnrollmentViewSet, basename='enrollment')
 router.register(r'certificates', views.CertificateViewSet, basename='certificate')
+router.register(r'chat', ChatViewSet, basename='chat')
 
 urlpatterns = [
     path('api/', include(router.urls)),
+    path('api/chat/quick-chat/', quick_chat, name='quick-chat'),
     path('api/generate-otp/', views.generate_otp, name='generate_otp'),
     path('api/verify-otp/', views.verify_otp, name='verify_otp'),
     path(

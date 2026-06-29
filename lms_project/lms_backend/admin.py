@@ -4,7 +4,7 @@ from typing import Any, cast
 from .models import (
     User, Team, Category, Course, Video, Quiz,
     Question, Enrollment, QuizAttempt, VideoProgress,
-    CertificateEnrollment, OTP, Notification, Request, CertificateTemplate
+    CertificateEnrollment, OTP, Notification, Request, CertificateTemplate, ChatMessage
 )
 
 
@@ -334,3 +334,16 @@ class CertificateTemplateAdmin(admin.ModelAdmin):
             f"Signature: {obj.signature_font}({obj.signature_font_size}), "
             f"Staff Signature: {obj.staff_signature_font}({obj.staff_signature_font_size})"
         )
+
+
+@admin.register(ChatMessage)
+class ChatMessageAdmin(admin.ModelAdmin):
+    list_display = ('user', 'role', 'created_at', 'conversation_id', 'preview_content')
+    list_filter = ('role', 'created_at', 'conversation_id')
+    search_fields = ('user__username', 'content', 'conversation_id')
+    readonly_fields = ('user', 'created_at')
+    ordering = ('-created_at',)
+    
+    @admin.display(description='Preview')
+    def preview_content(self, obj):
+        return obj.content[:50] + '...' if len(obj.content) > 50 else obj.content

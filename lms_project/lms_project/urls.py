@@ -11,6 +11,7 @@ from rest_framework.routers import DefaultRouter
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.decorators.csrf import csrf_exempt
+from lms_backend.chatbot_views import ChatViewSet, quick_chat
 from lms_backend.views import (
     student_dashboard,
     newly_created_courses,
@@ -83,10 +84,12 @@ router.register(r'videos', VideoViewSet)
 router.register(r'quizzes', QuizViewSet)
 router.register(r'enrollments', EnrollmentViewSet, basename='enrollment')
 router.register(r'certificates', CertificateViewSet, basename='certificate')
+router.register(r'chat', ChatViewSet, basename='chat')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/chat/quick-chat/', quick_chat, name='quick-chat'),
     path('api/student/dashboard/', student_dashboard, name='student-dashboard'),
     path('api/student/newly-created-courses/', newly_created_courses, name='newly-created-courses'),
 

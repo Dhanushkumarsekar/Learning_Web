@@ -179,11 +179,10 @@ function App() {
         return appContent;
     }
 
-    return (
-        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-            {appContent}
-        </GoogleOAuthProvider>
-    );
+   
 }
+
+
+
 
 export default App;

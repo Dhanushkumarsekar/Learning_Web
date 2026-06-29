@@ -278,8 +278,6 @@ class Video(models.Model):
         if not self.video_file and not self.pdf_file:
             raise ValidationError("Please upload a video or a PDF.")
 
-
-
 class Quiz(models.Model):
     video = models.ForeignKey(Video, on_delete=models.CASCADE, null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='quizzes')
@@ -612,3 +610,27 @@ class CourseAssignment(models.Model):
         from django.utils import timezone
         from datetime import timedelta
         return self.assigned_at > timezone.now() - timedelta(hours=24)
+
+
+class ChatMessage(models.Model):
+    """Store AI Chatbot conversations with users"""
+    ROLE_CHOICES = (
+        ('user', 'User'),
+        ('assistant', 'Assistant'),
+        ('system', 'System'),
+    )
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chat_messages')
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    conversation_id = models.CharField(max_length=100, default='default', help_text='Group messages by conversation')
+    
+    class Meta:
+        ordering = ['created_at']
+        indexes = [
+            models.Index(fields=['user', 'conversation_id', '-created_at']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.role} - {self.created_at.strftime('%Y-%m-%d %H:%M')}"

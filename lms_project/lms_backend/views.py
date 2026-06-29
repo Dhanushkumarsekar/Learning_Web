@@ -39,6 +39,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from PyPDF2 import PdfReader, PdfWriter
+from moviepy import VideoFileClip
 
 
 from .models import Course, Enrollment

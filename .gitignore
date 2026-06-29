@@ -5,11 +5,6 @@ __pycache__/
 *.log
 *.bak
 
-# Virtual environment
-venv/
-env/
-.venv/
-
 # Local environment secrets
 .env
 lms_project/.env
@@ -17,16 +12,3 @@ lms_project/.env
 # User/runtime uploads
 lms_project/media/certificate_templates/
 lms_project/media/generated_certificates/
-
-# React frontend
-lms-frontend/node_modules/
-lms-frontend/build/
-lms-frontend/.env
-
-# IDE files
-.vscode/
-.idea/
-
-# OS files
-.DS_Store
-Thumbs.db
